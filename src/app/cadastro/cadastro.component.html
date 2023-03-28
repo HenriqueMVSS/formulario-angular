@@ -1,0 +1,107 @@
+<main class="principal">
+  <h2 class="principal__titulo">Dados do cadastro</h2>
+
+  <form class="principal__formulario" id="formulario"  [formGroup]="formulario" (ngSubmit)="cadastrar()">
+    <h3 class="principal__subtitulo">Dados pessoais</h3>
+    <div class="formulario__campo">
+      <label class="campo__etiqueta" for="nome">Nome Completo</label>
+      <input formControlName="name" id="nome" class="campo__escrita" >
+      <div class="erro__texto">
+        <span  *ngIf="formulario.get('name')?.errors?.['required'] && formulario.get('name')?.touched">Este campo é obrigatório</span>
+        <span  *ngIf="formulario.get('name')?.errors?.['minlength'] && formulario.get('name')?.touched">A quantidade mínima de caracteres é 2</span>
+      </div>
+    </div>
+    <div class="formulario__dupla">
+      <div class="formulario__campo">
+        <label class="campo__etiqueta" for="nascimento">Nascimento</label>
+        <input formControlName="nascimento" id="nascimento" type="date" class="campo__escrita"/>
+      </div>
+      <div class="formulario__campo">
+        <label class="campo__etiqueta" for="telefone">Contato</label>
+        <input formControlName="telefone" id="telefone" type="tel" placeholder="(XX) XXXXX-XXXX" class="campo__escrita" maxlength="12"/>
+        <div class="erro__texto">
+          <span  *ngIf="formulario.get('telefone')?.errors?.['required'] && formulario.get('telefone')?.touched">Este campo é obrigatório</span>
+          <span  *ngIf="formulario.get('telefone')?.errors?.['pattern'] && formulario.get('telefone')?.touched">Favor inserir um telefone válido: XX XXXXX-XXXX</span>
+        </div>
+      </div>
+    </div>
+    <div class="formulario__campo">
+      <label class="campo__etiqueta" for="email">E-mail</label>
+      <input formControlName="email" id="email" type="email" class="campo__escrita"/>
+      <div class="erro__texto">
+        <span  *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">Este campo é obrigatório</span>
+        <span  *ngIf="formulario.get('email')?.errors?.['pattern'] && formulario.get('email')?.touched">Favor inserir um email válido: example@dominio.com</span>
+      </div>
+    </div>
+
+
+    <h3 class="principal__subtitulo">Endereço</h3>
+
+    <div class="formulario__campo">
+      <label class="campo__etiqueta" for="cep">CEP</label>
+      <input formControlName="cep" id="cep" class="campo__escrita" />
+      <div id="erro"></div>
+    </div>
+
+    <div class="formulario__campo">
+      <label class="campo__etiqueta" for="endereco">Endereço</label>
+      <input formControlName="endereco" id="endereco" class="campo__escrita" />
+    </div>
+    <div class="formulario__dupla">
+      <div class="formulario__campo">
+        <label class="campo__etiqueta" for="numero">Numero</label>
+        <input formControlName="numero" id="numero" class="campo__escrita" />
+      </div>
+      <div class="formulario__campo">
+        <label class="campo__etiqueta" for="complemento">Complemento</label>
+        <input formControlName="complemento" id="complemento" class="campo__escrita" />
+      </div>
+    </div>
+    <div class="formulario__campo">
+      <label class="campo__etiqueta" for="bairro">Bairro</label>
+      <input formControlName="bairro" id="bairro" class="campo__escrita" />
+    </div>
+    <div class="formulario__dupla">
+      <div class="formulario__campo">
+        <label class="campo__etiqueta" for="cidade">Cidade</label>
+        <input formControlName="cidade" id="cidade" class="campo__escrita" />
+      </div>
+
+      <div class="formulario__campo">
+        <label class="campo__etiqueta" for="estado">UF</label>
+        <select id="estado" formControlName="estado" class="campo__escrita">
+          <option value="AC">Acre</option>
+          <option value="AL">Alagoas</option>
+          <option value="AP">Amapá</option>
+          <option value="AM">Amazonas</option>
+          <option value="BA">Bahia</option>
+          <option value="CE">Ceará</option>
+          <option value="DF">Distrito Federal</option>
+          <option value="ES">Espírito Santo</option>
+          <option value="GO">Goiás</option>
+          <option value="MA">Maranhão</option>
+          <option value="MT">Mato Grosso</option>
+          <option value="MS">Mato Grosso do Sul</option>
+          <option value="MG">Minas Gerais</option>
+          <option value="PA">Pará</option>
+          <option value="PB">Paraíba</option>
+          <option value="PR">Paraná</option>
+          <option value="PE">Pernambuco</option>
+          <option value="PI">Piauí</option>
+          <option value="RJ">Rio de Janeiro</option>
+          <option value="RN">Rio Grande do Norte</option>
+          <option value="RS">Rio Grande do Sul</option>
+          <option value="RO">Rondônia</option>
+          <option value="RR">Roraima</option>
+          <option value="SC">Santa Catarina</option>
+          <option value="SP">São Paulo</option>
+          <option value="SE">Sergipe</option>
+          <option value="TO">Tocantins</option>
+          <option value="EX">Estrangeiro</option>
+        </select>
+      </div>
+
+    </div>
+    <button type="submit" class="formulario__botao">Enviar formulário</button>
+    </form>
+</main>
