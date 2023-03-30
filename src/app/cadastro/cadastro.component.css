@@ -54,6 +54,18 @@
   float: right;
 }
 
+.formulario__botao__disabled {
+  background: rgb(150, 150, 150);
+  padding: 1em 4em;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  border: none;
+  color: var(--branco);
+  cursor: pointer;
+  float: right;
+}
+
 .formulario__erro {
   display: flex;
   margin-top: .5em;

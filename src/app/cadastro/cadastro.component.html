@@ -1,7 +1,7 @@
 <main class="principal">
   <h2 class="principal__titulo">Dados do cadastro</h2>
 
-  <form class="principal__formulario" id="formulario"  [formGroup]="formulario" (ngSubmit)="cadastrar()">
+  <form class="principal__formulario" id="formulario" [formGroup]="formulario" (ngSubmit)="cadastrar()">
     <h3 class="principal__subtitulo">Dados pessoais</h3>
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="nome">Nome Completo</label>
@@ -14,7 +14,11 @@
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="nascimento">Nascimento</label>
-        <input formControlName="nascimento" id="nascimento" type="date" class="campo__escrita"/>
+        <input formControlName="nascimento" id="nascimento" type="date" class="campo__escrita" validateDataDirective/>
+        <div class="erro__texto">
+          <span  *ngIf="formulario.get('nascimento')?.errors?.['required'] && formulario.get('nascimento')?.touched">Este campo é obrigatório</span>
+          <span  *ngIf="formulario.get('nascimento')?.errors?.['validateDataDirective'] && formulario.get('nascimento')?.touched">A idade tem que ser superior a 18 anos.</span>
+        </div>
       </div>
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="telefone">Contato</label>
@@ -39,18 +43,28 @@
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="cep">CEP</label>
-      <input formControlName="cep" id="cep" class="campo__escrita" />
-      <div id="erro"></div>
+      <input formControlName="cep" id="cep" class="campo__escrita" maxlength="8" (keyup)="buscarCep()" validarCep/>
+      <div class="erro__texto">
+        <span  *ngIf="formulario.get('cep')?.errors?.['required'] && formulario.get('cep')?.touched">Este campo é obrigatório</span>
+        <span  *ngIf="formulario.get('cep')?.errors?.['minlength'] && formulario.get('cep')?.touched">Favor inserir um cep válido.</span>
+        <span  *ngIf="formulario.get('cep')?.errors?.['validarCep'] && formulario.get('cep')?.touched">Favor inserir um cep válido.</span>
+      </div>
     </div>
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="endereco">Endereço</label>
       <input formControlName="endereco" id="endereco" class="campo__escrita" />
+      <div class="erro__texto">
+        <span  *ngIf="formulario.get('endereco')?.errors?.['required'] && formulario.get('endereco')?.touched">Este campo é obrigatório</span>  
+      </div>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="numero">Numero</label>
         <input formControlName="numero" id="numero" class="campo__escrita" />
+        <div class="erro__texto">
+          <span  *ngIf="formulario.get('numero')?.errors?.['required'] && formulario.get('numero')?.touched">Este campo é obrigatório</span>  
+        </div>
       </div>
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="complemento">Complemento</label>
@@ -60,11 +74,17 @@
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="bairro">Bairro</label>
       <input formControlName="bairro" id="bairro" class="campo__escrita" />
+      <div class="erro__texto">
+        <span  *ngIf="formulario.get('bairro')?.errors?.['required'] && formulario.get('bairro')?.touched">Este campo é obrigatório</span>  
+      </div>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="cidade">Cidade</label>
         <input formControlName="cidade" id="cidade" class="campo__escrita" />
+        <div class="erro__texto">
+          <span  *ngIf="formulario.get('cidade')?.errors?.['required'] && formulario.get('cidade')?.touched">Este campo é obrigatório</span>  
+        </div>
       </div>
 
       <div class="formulario__campo">
@@ -99,9 +119,12 @@
           <option value="TO">Tocantins</option>
           <option value="EX">Estrangeiro</option>
         </select>
+        <div class="erro__texto">
+          <span  *ngIf="formulario.get('estado')?.errors?.['required'] && formulario.get('estado')?.touched">Este campo é obrigatório</span>  
+        </div>
       </div>
 
     </div>
-    <button type="submit" class="formulario__botao">Enviar formulário</button>
+    <button type="submit" [ngClass]="btnDisabled()" [disabled]="!formulario.valid">Enviar formulário</button>
     </form>
 </main>
